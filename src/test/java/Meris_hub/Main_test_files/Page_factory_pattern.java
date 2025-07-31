@@ -101,4 +101,27 @@ public class Page_factory_pattern {
 
         }
     }
+
+    public void enter_valid_email_(String pwd){
+        try{
+            pass.sendKeys(pwd);
+            Page_factory_pattern.timeout2000();
+
+            WebElement ele = pass;
+            String val = pass.getAttribute("value");
+            System.out.println(val);
+
+            try{
+                if(val.equals(pass)){
+                    Assert.assertEquals(true, true,"Login to the system with valid credential");
+                }else{
+                    Assert.assertEquals(true, false,"Can't Login to the system with invalid credential");
+                }
+            }catch (Exception ex){
+                System.out.println(ex);
+            }
+        }catch (Exception ex){
+
+        }
+    }
 }
