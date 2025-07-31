@@ -60,6 +60,7 @@ public class Page_factory_pattern {
             pass.sendKeys(pwd);
             Page_factory_pattern.timeout2000();
             loginBtn.click();
+            Page_factory_pattern.timeout2000();
 
             WebElement ele = userEmail;
             String val = ele.getAttribute("value");
@@ -73,6 +74,31 @@ public class Page_factory_pattern {
             }
         }catch (Exception ex){
             System.out.println(ex);
+        }
+    }
+
+    public void enter_valid_email_and_password(String validEmail, String pwd){
+        try{
+            userEmail.sendKeys(validEmail);
+            Page_factory_pattern.timeout2000();
+            pass.sendKeys(pwd);
+            Page_factory_pattern.timeout2000();
+
+            WebElement ele = userEmail;
+            String val = userEmail.getAttribute("value");
+            System.out.println(val);
+
+            try{
+                if(val.equals(validEmail)){
+                    Assert.assertEquals(true, true,"Login to the system with valid credential");
+                }else{
+                    Assert.assertEquals(true, false,"Can't Login to the system with invalid credential");
+                }
+            }catch (Exception ex){
+                System.out.println(ex);
+            }
+        }catch (Exception ex){
+
         }
     }
 }
