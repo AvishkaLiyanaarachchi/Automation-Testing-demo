@@ -1,6 +1,7 @@
 package Meris_hub.Main_test_files;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,7 @@ public class Page_factory_pattern {
 
     @FindBy (xpath="//*[@id=\"formAuthentication\"]/div[3]/button")
     WebElement loginBtn;
+
 
     public static void timeout2000(){
         try{
@@ -79,13 +81,19 @@ public class Page_factory_pattern {
 
     public void enter_valid_email_and_password(String validEmail, String pwd){
         try{
+            WebElement ele1 = userEmail;
+            ele1.sendKeys(Keys.DELETE);
+            Page_factory_pattern.timeout2000();
             userEmail.sendKeys(validEmail);
+            Page_factory_pattern.timeout2000();
+            WebElement ele2 =  pass;
+            ele2.sendKeys(Keys.DELETE);
             Page_factory_pattern.timeout2000();
             pass.sendKeys(pwd);
             Page_factory_pattern.timeout2000();
 
             WebElement ele = userEmail;
-            String val = userEmail.getAttribute("value");
+            String val = ele.getAttribute("value");
             System.out.println(val);
 
             try{
@@ -102,8 +110,11 @@ public class Page_factory_pattern {
         }
     }
 
-    public void enter_valid_email_(String pwd){
+    public void enter_valid_email_and_invalid_pwd(String pwd){
         try{
+            WebElement ele1 =  pass;
+            ele1.sendKeys(Keys.DELETE);
+            Page_factory_pattern.timeout2000();
             pass.sendKeys(pwd);
             Page_factory_pattern.timeout2000();
 
