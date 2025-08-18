@@ -11,10 +11,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -52,10 +50,21 @@ public class Merishub {
     @BeforeClass
     public void beforeClass(){
         try{
+
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
+            SoftAssert softasset = new SoftAssert();
             driver.get("https://internal.meris.com.au/");
             driver.manage().window().maximize();
+            boolean actualURL = driver.getTitle().equalsIgnoreCase("Same");
+            //String expectedURL = "uyttu/";
+
+            try{
+                softasset.assertTrue(actualURL, "Can't reach the page");
+            }catch (Exception ex){
+                softasset.assertFalse(actualURL, "Can reach the page");
+            }
+
 
         }catch (Exception ex){
             System.out.println(ex);
